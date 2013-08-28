@@ -80,3 +80,9 @@ Notes
 This script deletes a file once it has been uploaded, so make backups first!
 
 It's best run with a cron job
+
+Credits
+=======
+auth.py originally by velocityzen
+
+tumblr_upload_script.php originall by Richard Clifford
