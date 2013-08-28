@@ -39,33 +39,44 @@ On Ubuntu, run this and try again:
 
 `apt-get install libpcre3-dev`
 
-Getting OAUTH keys
+Get OAUTH keys
 ==================
 To run this script you need to register it as an app first
 
-Get Consumer Key and Secret Key [from tumblr]http://www.tumblr.com/oauth/apps
+Get Consumer Key and Secret Key [from tumblr](http://www.tumblr.com/oauth/apps)
 
- Edit consumer_key and consumer_secret in auth.py
- Install python, python-oauth2, python-poster
- Run python auth.py
-5) go to url
-6) 'allow' in tumblr web page
-7) y (yes authenticated)
-8) copy url you are returned to: ex google.com/?oauth_token=927839871293871928hikjb copy this long key (as PIN)
-9) PIN = number copied from step 8
-10) Edit photo2tumblr.py
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-OAUTH_TOKEN = ''
-OAUTH_TOKEN_SECRET = ''
-DIR = 'dir/with/pictures'
-FILE_MASK = '*.jpg'
-BLOG = 'blog here'
-11) Careful about BLOG
-WRONG: http://josenaves.tumblr.com/
-RIGHT: josenaves.tumblr.com
-12) python photo2tumblr.py
+Edit consumer_key and consumer_secret in auth.py with the values tumblr supplies
+
+Install necessary python libraries
+`sudo apt-get install python python-oauth2 python-poster`
+
+Open a terminal and run `python auth.py` and go to the url
+
+Press "allow" in the tumblr web page to authenticate it
+
+In the terminal press `y` to confirm that it has been authenticated
+
+Copy the oauth_token value in the url that is returned. For example, if the url is: https://twitter.com/?oauth_token=wzdfUMvf58VojPZHRiV2GaDnxmoc5McAsdXpxsM9lwpCHRPKJm&oauth_verifier=5WSFWfjaztzE5x3O9GsfzFpKk1snwGpgKGiXQ2PJImOoBi5rsq#_=_ then copy 5WSFWfjaztzE5x3O9GsfzFpKk1snwGpgKGiXQ2PJImOoBi5rsq 
+
+In the terminal paste the oauth_verifier value in as your PIN
+
+Open tumbler_upload_script.php and modify the following values
+
+`define('CONSUMER_KEY', '');` - Value from the tumblr apps page
+`define('CONSUMER_SECRET', '');` - Value from the tumblr apps page
+`define('OAUTH_TOKEN', '');` - Value returned from entering PIN
+`define('OAUTH_TOKEN_SECRET', '');` - Value returned from entering PIN
 
 Usage
 =====
+Change the $blog_name variable to your blog address (minus the http://)
 
+Change the location of your images in $oldest_file
+
+Run `php tumblr_photo_upload.php`
+
+Notes
+=====
+This script deletes a file once it has been uploaded, so make backups first!
+
+It's best run with a cron job
